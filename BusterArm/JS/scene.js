@@ -47,7 +47,7 @@ var container, stats, controls;
         scene.add( grid );
 
         // model
-        var loader = new THREE.ObjectLoader();
+        var loader = new ObjectLoader();
         loader.load( 'Model/OBJ.obj', function ( object ) {
 
           mixer = new THREE.AnimationMixer( object );
