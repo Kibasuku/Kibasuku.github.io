@@ -40,6 +40,19 @@
 
 				var manager = new THREE.LoadingManager();
 				manager.addHandler( /\.dds$/i, new DDSLoader() );
+				
+				var onProgress = function ( xhr ) {
+
+				    if ( xhr.lengthComputable ) {
+
+					var percentComplete = xhr.loaded / xhr.total * 100;
+					console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
+				    }
+
+				};
+
+				var onError = function () { };
 
 				// comment in the following line and import TGALoader if your asset uses TGA textures
 				// manager.addHandler( /\.tga$/i, new TGALoader() );
