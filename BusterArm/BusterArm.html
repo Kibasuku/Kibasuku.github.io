@@ -54,43 +54,30 @@
 				light4.position.set(-500,300,500);
 				scene.add(light4);
 
-				var onProgress = function ( xhr ) {
+				var loader = new OBJLoader();
 
-				    if ( xhr.lengthComputable ) {
+// load a resource
+				loader.load(
+					// resource URL
+					'Model/OBJ.obj',
+					// called when resource is loaded
+					function ( object ) {
 
-					var percentComplete = xhr.loaded / xhr.total * 100;
-					console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+						scene.add( object );
 
-				    }
+					},
+					// called when loading is in progresses
+					function ( xhr ) {
 
-				};
+						console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
-                var onError = function () { };
+					},
+					// called when loading has errors
+					function ( error ) {
 
-                var manager = new THREE.LoadingManager();
-                manager.addHandler( /\.dds$/i, new DDSLoader() );
+						console.log( 'An error happened' );
 
-                // comment in the following line and import TGALoader if your asset uses TGA textures
-                // manager.addHandler( /\.tga$/i, new TGALoader() );
-
-                 new MTLLoader( manager )
-                    .setPath( 'Model/' )
-                    .load( 'OBJ.mtl', function ( materials ) {
-
-                        materials.preload();
-
-                        new OBJLoader( manager )
-                            .setMaterials( materials )
-                            .setPath( 'Model/' )
-                            .load( 'OBJ.obj', function ( object ) {
-
-                                object.position.y = -50;
-                                scene.add( object );
-				animate();
-
-                            }, onProgress, onError );
-
-                    } );
+					}
 				 renderer = new THREE.WebGLRenderer({antialias:true});
 				renderer.setSize(window.innerWidth,window.innerHeight);
 				document.body.appendChild(renderer.domElement);
