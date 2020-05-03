@@ -48,7 +48,7 @@ var container, stats, controls;
 
         // model
         var loader = new THREE.ObjectLoader();
-        loader.load( "Model/OBJ.obj", function ( object ) {
+        loader.load( 'Model/OBJ.obj', function ( object ) {
 
           mixer = new THREE.AnimationMixer( object );
 
