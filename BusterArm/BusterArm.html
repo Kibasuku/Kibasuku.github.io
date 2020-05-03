@@ -30,7 +30,7 @@
         scene.add(hlight);
         var directionalLight = new THREE.DirectionalLight(0xffffff,100);
         directionalLight.position.set(0,1,0);
-        directionalLight.castShadow = true;
+        directionalLight.castShadow = false;
         scene.add(directionalLight);
         var light = new THREE.PointLight(0xc4c4c4,10);
         light.position.set(0,300,500);
