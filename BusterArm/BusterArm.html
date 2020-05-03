@@ -27,6 +27,24 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
             
+            new MTLLoader( manager )
+                    .setPath( 'Model/' )
+                    .load( 'OBJ.mtl', function ( materials ) {
+
+                        materials.preload();
+
+                        new OBJLoader( manager )
+                            .setMaterials( materials )
+                            .setPath( 'Model/' )
+                            .load( 'OBJ.obj', function ( object ) {
+
+                                object.position.y = - 95;
+                                scene.add( object );
+
+                            }, onProgress, onError );
+
+                    } );
+            
         </script>
 
     </body>
