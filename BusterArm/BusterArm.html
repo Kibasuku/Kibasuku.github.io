@@ -27,6 +27,9 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
             
+            var manager = new THREE.LoadingManager();
+                manager.addHandler( /\.dds$/i, new DDSLoader() );
+            
             new MTLLoader( manager )
                     .setPath( 'Model/' )
                     .load( 'OBJ.mtl', function ( materials ) {
