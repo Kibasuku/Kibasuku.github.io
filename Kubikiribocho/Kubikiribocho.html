@@ -67,14 +67,14 @@
 
 	var mtlLoader = new MTLLoader();
 	mtlLoader.setPath( 'Model/' );
-	mtlLoader.load( 'BusterArm.mtl', function( materials ) {
+	mtlLoader.load( 'Kubikiribicho.mtl', function( materials ) {
 
 	    materials.preload();
 
 	    var objLoader = new OBJLoader();
 	    objLoader.setMaterials( materials );
 	    objLoader.setPath( 'Model/' );
-	    objLoader.load( 'BusterArm.obj', function ( object ) {
+	    objLoader.load( 'Kubikiribicho.obj', function ( object ) {
 
 		scene.add( object );
 		    animate();
