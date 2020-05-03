@@ -71,7 +71,7 @@
 
 	    materials.preload();
 
-	    var objLoader = new THREE.OBJLoader();
+	    var objLoader = new OBJLoader();
 	    objLoader.setMaterials( materials );
 	    objLoader.setPath( 'Model/' );
 	    objLoader.load( 'OBJ.obj', function ( object ) {
