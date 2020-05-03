@@ -55,7 +55,7 @@
                 // comment in the following line and import TGALoader if your asset uses TGA textures
                 // manager.addHandler( /\.tga$/i, new TGALoader() );
 
-                new MTLLoader( manager )
+                 var mesh = new MTLLoader( manager )
                     .setPath( 'Model/' )
                     .load( 'OBJ.mtl', function ( materials ) {
 
