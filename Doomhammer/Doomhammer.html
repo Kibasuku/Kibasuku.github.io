@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>3D view</title>
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
+
+    <body>
+
+        <script type="module">
+
+	    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
+
+            import { DDSLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/DDSLoader.js';
+            import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/MTLLoader.js';
+            import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/OBJLoader.js';
+	    import { OrbitControls }from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
+
+				let scene, camera, renderer;
+      function init() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xdddddd);
+        camera = new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,1,5000);
+        camera.rotation.y = 45/180*Math.PI;
+        camera.position.x = 800;
+        camera.position.y = 100;
+        camera.position.z = 1000;
+	      
+       var hlight = new THREE.AmbientLight (0x404040,300);
+        scene.add(hlight);
+        var directionalLight = new THREE.DirectionalLight(0xffffff,100);
+        directionalLight.position.set(0,1,0);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+        var light = new THREE.PointLight(0xc4c4c4,30);
+        light.position.set(0,300,500);
+        scene.add(light);
+        var light2 = new THREE.PointLight(0xc4c4c4,30);
+        light2.position.set(500,100,0);
+        scene.add(light2);
+        var light3 = new THREE.PointLight(0xc4c4c4,30);
+        light3.position.set(0,100,-500);
+        scene.add(light3);
+        var light4 = new THREE.PointLight(0xc4c4c4,30);
+        light4.position.set(-500,300,500);
+        scene.add(light4);
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+	      
+	var controls = new OrbitControls( camera, renderer.domElement );
+
+			//controls.update() must be called after any manual changes to the camera's transform
+			camera.position.set( 0, 20, 100 );
+			controls.update();
+
+		var onProgress = function ( xhr ) {
+	    if ( xhr.lengthComputable ) {
+		var percentComplete = xhr.loaded / xhr.total * 100;
+		console.log( Math.round(percentComplete, 2) + '% downloaded' );
+	    }
+	};
+
+	var onError = function ( xhr ) { };
+
+	THREE.Loader.Handlers.add( /\.dds$/i, new DDSLoader() );
+
+	var mtlLoader = new MTLLoader();
+	mtlLoader.setPath( 'Model/' );
+	mtlLoader.load( 'Doomhammer.mtl', function( materials ) {
+
+	    materials.preload();
+
+	    var objLoader = new OBJLoader();
+	    objLoader.setMaterials( materials );
+	    objLoader.setPath( 'Model/' );
+	    objLoader.load( 'Doomhammer.obj', function ( object ) {
+
+		scene.add( object );
+		    animate();
+
+	    }, onProgress, onError );
+
+	});
+      }
+      function animate() {
+        renderer.render(scene,camera);
+        requestAnimationFrame(animate);
+	
+      }
+      init();
+				
+				
+        </script>
+
+    </body>
+</html>
