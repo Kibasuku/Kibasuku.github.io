@@ -26,12 +26,6 @@
         camera.position.x = 800;
         camera.position.y = 100;
         camera.position.z = 1000;
-        
-	      var controls = new OrbitControls( camera, renderer.domElement );
-
-		//controls.update() must be called after any manual changes to the camera's transform
-		camera.position.set( 0, 20, 100 );
-		controls.update();
 	      
         hlight = new THREE.AmbientLight (0x404040,100);
         scene.add(hlight);
@@ -54,6 +48,12 @@
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(window.innerWidth,window.innerHeight);
         document.body.appendChild(renderer.domElement);
+	      
+	var controls = new OrbitControls( camera, renderer.domElement );
+
+		//controls.update() must be called after any manual changes to the camera's transform
+		camera.position.set( 0, 20, 100 );
+		controls.update();
 	      
         loader.load(
 			// resource URL
