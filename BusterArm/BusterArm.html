@@ -24,8 +24,9 @@
                 camera.position.x = 800;
                 camera.position.y = 100;
                 camera.position.z = 1000;
-                controls = new THREE.OrbitControls(camera);
-                controls.addEventListener('change', renderer);
+                controls = new OrbitControls( camera, renderer.domElement );
+                controls.target.set( 0, 100, 0 );
+                controls.update();
                 hlight = new THREE.AmbientLight (0x404040,100);
                 scene.add(hlight);
                 directionalLight = new THREE.DirectionalLight(0xffffff,100);
@@ -73,7 +74,7 @@
                 renderer.render(scene,camera);
                 requestAnimationFrame(animate);
               }
-              }
+          }
               init();
     </script>
   </body>
