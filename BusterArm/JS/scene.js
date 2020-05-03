@@ -76,7 +76,7 @@ var container, stats, controls;
         renderer.shadowMap.enabled = true;
         container.appendChild( renderer.domElement );
 
-        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls = new OrbitControls( camera, renderer.domElement );
         controls.target.set( 0, 100, 0 );
         controls.update();
 
