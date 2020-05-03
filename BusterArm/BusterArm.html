@@ -55,7 +55,7 @@
                 // comment in the following line and import TGALoader if your asset uses TGA textures
                 // manager.addHandler( /\.tga$/i, new TGALoader() );
 
-                 var mesh = new MTLLoader( manager )
+                 var obj = new MTLLoader( manager )
                     .setPath( 'Model/' )
                     .load( 'OBJ.mtl', function ( materials ) {
 
@@ -72,6 +72,7 @@
                             }, onProgress, onError );
 
                     } );
+				mesh = new THREE.Mesh(obj);
 
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
