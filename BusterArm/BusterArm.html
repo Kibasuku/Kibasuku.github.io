@@ -1,30 +1,35 @@
 <html lang="en"><head>
-    <title>Buster Arm</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="main.css">
-  </head>
+        <title>three.js webgl - FBX loader</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
 
-  <body>
+    <body>
+        <div id="info">
+            <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - FBXLoader<br>
+            Character and animation from <a href="https://www.mixamo.com/" target="_blank" rel="noopener">Mixamo</a>
+        </div>
 
-   
-    
-    <script tyre="threeMin" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-    
-    
-    <script type="module">
+        <script type="module">
 
-        var container, stats, controls;
-              var camera, scene, renderer, light;
+            import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js";
 
-              var clock = new THREE.Clock();
 
-              var mixer;
+            import { OrbitControls }from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
+            import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/FBXLoader.js';
 
-              init();
-              animate();
+            var container, stats, controls;
+            var camera, scene, renderer, light;
 
-              function init() {
+            var clock = new THREE.Clock();
+
+            var mixer;
+
+            init();
+            animate();
+
+            function init() {
 
                 container = document.createElement( 'div' );
                 document.body.appendChild( container );
@@ -63,26 +68,26 @@
                 scene.add( grid );
 
                 // model
-                var loader = new OBJLoader();
-                loader.load( "Model/OBJ.obj", function ( object ) {
+                var loader = new FBXLoader();
+                loader.load( 'Model/FBX.fbx', function ( object ) {
 
-                  mixer = new THREE.AnimationMixer( object );
+                    mixer = new THREE.AnimationMixer( object );
 
-                  var action = mixer.clipAction( object.animations[ 0 ] );
-                  action.play();
+                    var action = mixer.clipAction( object.animations[ 0 ] );
+                    action.play();
 
-                  object.traverse( function ( child ) {
+                    object.traverse( function ( child ) {
 
-                    if ( child.isMesh ) {
+                        if ( child.isMesh ) {
 
-                      child.castShadow = true;
-                      child.receiveShadow = true;
+                            child.castShadow = true;
+                            child.receiveShadow = true;
 
-                    }
+                        }
 
-                  } );
+                    } );
 
-                  scene.add( object );
+                    scene.add( object );
 
                 } );
 
@@ -92,30 +97,28 @@
                 renderer.shadowMap.enabled = true;
                 container.appendChild( renderer.domElement );
 
-                controls = new THREE.OrbitControls( camera, renderer.domElement );
+                controls = new OrbitControls( camera, renderer.domElement );
                 controls.target.set( 0, 100, 0 );
                 controls.update();
 
                 window.addEventListener( 'resize', onWindowResize, false );
 
-                // stats
-                stats = new Stats();
-                container.appendChild( stats.dom );
 
-              }
 
-              function onWindowResize() {
+            }
+
+            function onWindowResize() {
 
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
 
                 renderer.setSize( window.innerWidth, window.innerHeight );
 
-              }
+            }
 
-              //
+            //
 
-              function animate() {
+            function animate() {
 
                 requestAnimationFrame( animate );
 
@@ -125,11 +128,12 @@
 
                 renderer.render( scene, camera );
 
-                stats.update();
 
-              }
-            
-    </script>
 
-  
+            }
 
+        </script>
+
+    
+
+<div><canvas width="811" height="625" tabindex="0" style="width: 811px; height: 625px;"></canvas><div style="position: fixed; top: 0px; left: 0px; cursor: pointer; opacity: 0.9; z-index: 10000;"><canvas width="80" height="48" style="width: 80px; height: 48px; display: block;"></canvas><canvas width="80" height="48" style="width: 80px; height: 48px; display: none;"></canvas><canvas width="80" height="48" style="width: 80px; height: 48px; display: none;"></canvas></div></div></body></html>
