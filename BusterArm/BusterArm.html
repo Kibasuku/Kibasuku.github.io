@@ -44,9 +44,6 @@
 				light4.position.set(-500,300,500);
 				scene.add(light4);
 
-				renderer = new THREE.WebGLRenderer({antialias:true});
-				renderer.setSize(window.innerWidth,window.innerHeight);
-				document.body.appendChild(renderer.domElement);
 				
 				var loader = new OBJLoader();
 
@@ -75,9 +72,15 @@
 					}
 					);
 				 
-				//
+				renderer = new THREE.WebGLRenderer({antialias:true});
+				renderer.setSize(window.innerWidth,window.innerHeight);
+				document.body.appendChild(renderer.domElement);
 
 				}
+		
+			
+				
+		
 	      function animate() {
 		renderer.render(scene,camera);
 		requestAnimationFrame(animate);
