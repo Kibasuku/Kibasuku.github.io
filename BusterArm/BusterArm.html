@@ -9,13 +9,11 @@
 
         <script type="module">
 
-             
+	    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
 
-			import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
-
-            		import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/OBJLoader.js';
-			import { OrbitControls }from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
-			
+            import { DDSLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/DDSLoader.js';
+            import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/MTLLoader.js';
+            import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/OBJLoader.js';
 
 				let scene, camera, renderer, controls;
       function init() {
@@ -51,33 +49,38 @@
 	      
 	controls = new OrbitControls( camera, renderer.domElement );
 
-		//controls.update() must be called after any manual changes to the camera's transform
-		camera.position.set( 0, 20, 100 );
-		controls.update();
-	      
-	var loader = new OBJLoader();
-        loader.load(
-			// resource URL
-			'Model/OBJ.obj',
-			function ( object ) {
-			
-				scene.add( object );
-				animate();
-			
-			},
-			// called when loading is in progresses
-			function ( xhr ) {
-			
-				console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-			
-			},
-			// called when loading has errors
-			function ( error ) {
-				
-				console.log( 'An error happened' );
-			
-			}
-			);
+			//controls.update() must be called after any manual changes to the camera's transform
+			camera.position.set( 0, 20, 100 );
+			controls.update();
+
+		var onProgress = function ( xhr ) {
+	    if ( xhr.lengthComputable ) {
+		var percentComplete = xhr.loaded / xhr.total * 100;
+		console.log( Math.round(percentComplete, 2) + '% downloaded' );
+	    }
+	};
+
+	var onError = function ( xhr ) { };
+
+	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+
+	var mtlLoader = new THREE.MTLLoader();
+	mtlLoader.setPath( 'Model/' );
+	mtlLoader.load( 'OBJ.mtl', function( materials ) {
+
+	    materials.preload();
+
+	    var objLoader = new THREE.OBJLoader();
+	    objLoader.setMaterials( materials );
+	    objLoader.setPath( 'Model/' );
+	    objLoader.load( 'OBJ.obj', function ( object ) {
+
+		scene.add( object );
+		    animate();
+
+	    }, onProgress, onError );
+
+	});
       }
       function animate() {
         renderer.render(scene,camera);
