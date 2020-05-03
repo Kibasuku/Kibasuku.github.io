@@ -14,18 +14,18 @@
 
         <script type="module">
 
-            import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
-import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js';
-import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/OBJLoader2.js';
-import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/MTLLoader.js';
-import {MtlObjBridge} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+             import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
 
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+            import { DDSLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/DDSLoader.js';
+            import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/MTLLoader.js';
+            import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/OBJLoader.js';
+            
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
             
         </script>
 
