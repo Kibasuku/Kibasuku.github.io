@@ -22,7 +22,6 @@
 			
 
 			var camera, scene, renderer;
-			var mesh;
 
 			function init() {
 
@@ -77,7 +76,7 @@
                 // comment in the following line and import TGALoader if your asset uses TGA textures
                 // manager.addHandler( /\.tga$/i, new TGALoader() );
 
-                 var obj = new MTLLoader( manager )
+                 new MTLLoader( manager )
                     .setPath( 'Model/' )
                     .load( 'OBJ.mtl', function ( materials ) {
 
