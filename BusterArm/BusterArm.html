@@ -17,7 +17,7 @@
 			import { OrbitControls }from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
 			
 
-				let scene, camera, renderer;
+				let scene, camera, renderer, controls;
       function init() {
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0xdddddd);
@@ -49,7 +49,7 @@
         renderer.setSize(window.innerWidth,window.innerHeight);
         document.body.appendChild(renderer.domElement);
 	      
-	var controls = new OrbitControls( camera, renderer.domElement );
+	controls = new OrbitControls( camera, renderer.domElement );
 
 		//controls.update() must be called after any manual changes to the camera's transform
 		camera.position.set( 0, 20, 100 );
