@@ -65,7 +65,7 @@
 
 	THREE.Loader.Handlers.add( /\.dds$/i, new DDSLoader() );
 
-	var mtlLoader = new THREE.MTLLoader();
+	var mtlLoader = new MTLLoader();
 	mtlLoader.setPath( 'Model/' );
 	mtlLoader.load( 'OBJ.mtl', function( materials ) {
 
