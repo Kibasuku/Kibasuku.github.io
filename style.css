@@ -49,6 +49,7 @@ body {
 	padding: 10px;
 	text-indent: 50px;
 	height: 100%;
+	text-align: justify; 
 	font-family: 'Helvetica', sans-serif;
 	font-size: 30px;
 }
